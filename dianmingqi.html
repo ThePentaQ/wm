@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点名器</title>
+	<style>
+		#all{
+			width:400px;
+			margin:0 auto;
+		}
+		#content{
+			width:400px;
+			height:300px;
+			border:solid 1px #000;
+			font-size:32px;
+			text-align:center;
+			line-height:300px;
+		}
+	</style>
+</head>
+<body>
+	<div id="all">
+		<div id="content">
+			rou
+		</div>
+		<button id="sta">开始</button>
+		<button id="sto">结束</button>
+	</div>
+
+	<script>
+	var names = ['一','二','三','四','五','六','七','八'];
+	var sta = document.getElementById('sta');
+	var sto = document.getElementById('sto');
+	var content = document.getElementById('content');
+	var inte = null;
+
+	sta.onclick = function(){
+		//检测
+		if(inte != null) return;
+		//启动一个定时器
+		inte = setInterval(function(){
+			//获取一个新的名字
+			var name = getNewName();
+			//修改文本
+			content.innerHTML = name;
+		}, 100)
+	}
+
+	///结束的单击 事件
+	sto.onclick = function(){
+		clearInterval(inte);//clear清空 清除
+		inte = null;
+	}
+
+	//获取随机值
+	function rand(m,n) {
+		return Math.ceil(Math.random()*(n-m+1)) + m-1;
+	}
+
+	function getNewName() {
+		//获取数组的长度
+		var len = names.length;//8
+		//随机索引
+		var index = rand(0, len-1);
+		//获取随机的名字
+		return names[index];
+	}
+
+
+
+	</script>
+</body>
+</html>
